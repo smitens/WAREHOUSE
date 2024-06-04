@@ -1,0 +1,26 @@
+{
+    "0f19127c-fa5c-4523-ad80-f01f057b0ea2": {
+        "id": "0f19127c-fa5c-4523-ad80-f01f057b0ea2",
+        "name": "Soap",
+        "quantity": 25,
+        "createdAt": "2024-06-03 17:58:56",
+        "updatedAt": "2024-06-04 07:14:54",
+        "deletedAt": null
+    },
+    "5cee37ef-b726-4efc-b051-764f615bcb84": {
+        "id": "5cee37ef-b726-4efc-b051-764f615bcb84",
+        "name": "Shampoo",
+        "quantity": 20,
+        "createdAt": "2024-06-03 20:19:20",
+        "updatedAt": "2024-06-03 20:47:09",
+        "deletedAt": null
+    },
+    "6f2a3cdb-0a99-43f1-a7ba-7515c0f1468f": {
+        "id": "6f2a3cdb-0a99-43f1-a7ba-7515c0f1468f",
+        "name": "Parfume",
+        "quantity": 40,
+        "createdAt": "2024-06-04 06:23:21",
+        "updatedAt": null,
+        "deletedAt": null
+    }
+}
