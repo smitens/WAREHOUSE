@@ -64,7 +64,7 @@ class ProductService
             $this->warehouse->addProductQuantity($productId, $quantity);
             $this->saveProducts();
             $this->logService->log(
-                "User {$this->username} added quantity to product {$product->getName()} (ID: {$productId}) at "
+                "User {$this->username} added quantity of {$quantity} to product {$product->getName()} (ID: {$productId}) at "
                 . Carbon::now()->toDateTimeString());
         } else {
             echo "\033[31mYou failed to add quantity!\033[0m\n";
@@ -81,7 +81,7 @@ class ProductService
         $this->warehouse->reduceProductQuantity($productId, $quantity);
         $this->saveProducts();
         $this->logService->log(
-            "User {$this->username} reduced quantity from product {$product->getName()} (ID: {$productId}) at "
+            "User {$this->username} reduced quantity of {$quantity} from product {$product->getName()} (ID: {$productId}) at "
             . Carbon::now()->toDateTimeString());
     } else {
             echo "\033[31mYou failed to reduce quantity!\033[0m\n";

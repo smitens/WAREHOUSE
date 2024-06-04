@@ -54,6 +54,11 @@ class Warehouse
         return false;
     }
 
+    public function listProducts(): array
+    {
+        return $this->products;
+    }
+
     private function showProducts(): void
     {
         $output = new ConsoleOutput();
