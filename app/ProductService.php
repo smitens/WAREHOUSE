@@ -4,6 +4,8 @@ namespace Warehouse\App;
 require 'vendor/autoload.php';
 
 use Carbon\Carbon;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ProductService
 {
@@ -13,10 +15,10 @@ class ProductService
     private string $username;
 
     public function __construct(
-        Warehouse $warehouse,
+        Warehouse      $warehouse,
         DataManagement $dataManagement,
-        LogService $logService,
-        string $username)
+        LogService     $logService,
+        string         $username)
     {
         $this->warehouse = $warehouse;
         $this->dataManagement = $dataManagement;
@@ -33,26 +35,28 @@ class ProductService
 
     public function createProduct(Product $product): void
     {
-        $this->warehouse ->addProduct($product);
+        $this->warehouse->addProduct($product);
         $this->saveProducts();
         $this->logService->log(
             "User {$this->username} created product {$product->getName()} (ID: {$product->getId()}) at "
             . Carbon::now()->toDateTimeString());
     }
 
-    public function editProductQuantity(string $productId, int $quantity): void
+    public function editProductInfo(string $productId, string $name, int $quantity, float $price): void
     {
         $product = $this->warehouse->getProduct($productId);
         if ($product) {
+            $product->setName($name);
             $product->setQuantity($quantity);
+            $product->setPrice($price);
             $this->saveProducts();
             $this->logService->log(
-                "User {$this->username} updated quantity for product {$product->getName()} (ID: {$productId})" .
+                "User {$this->username} updated information for product {$product->getName()} (ID: {$productId})" .
                 "to {$quantity} at " . Carbon::now()->toDateTimeString());
         } else {
-            echo "\033[31mYou failed to update quantity!\033[0m\n";
+            echo "\033[31mYou failed to update information!\033[0m\n";
             $this->logService->log(
-                "User {$this->username} failed to update quantity for product with ID: {$productId} at "
+                "User {$this->username} failed to update information for product with ID: {$productId} at "
                 . Carbon::now()->toDateTimeString());
         }
     }
@@ -78,12 +82,12 @@ class ProductService
     {
         $product = $this->warehouse->getProduct($productId);
         if ($product) {
-        $this->warehouse->reduceProductQuantity($productId, $quantity);
-        $this->saveProducts();
-        $this->logService->log(
-            "User {$this->username} reduced quantity of {$quantity} from product {$product->getName()} (ID: {$productId}) at "
-            . Carbon::now()->toDateTimeString());
-    } else {
+            $this->warehouse->reduceProductQuantity($productId, $quantity);
+            $this->saveProducts();
+            $this->logService->log(
+                "User {$this->username} reduced quantity of {$quantity} from product {$product->getName()} (ID: {$productId}) at "
+                . Carbon::now()->toDateTimeString());
+        } else {
             echo "\033[31mYou failed to reduce quantity!\033[0m\n";
             $this->logService->log(
                 "User {$this->username} failed to reduce quantity for product with ID: {$productId} at "
@@ -112,5 +116,24 @@ class ProductService
         $this->dataManagement->saveProducts($this->warehouse->listProducts());
         $this->logService->log(
             "User {$this->username} saved products to file at " . Carbon::now()->toDateTimeString());
+    }
+
+    public function generateReport(): void
+    {
+        $totalProducts = count($this->warehouse->listProducts());
+        $totalValue = array_reduce($this->warehouse->listProducts(), function ($carry, Product $product) {
+            return $carry + ($product->getPrice() * $product->getQuantity());
+        }, 0);
+
+        $output = new ConsoleOutput();
+        $table = new Table($output);
+        $table->setHeaders(['Total number of products', 'Total value of all products']);
+        $table->addRow([
+            $totalProducts,
+            $totalValue . " EUR"
+        ]);
+        $table->render();
+        $this->logService->log(
+            "User {$this->username} generated product report at " . Carbon::now()->toDateTimeString());
     }
 }

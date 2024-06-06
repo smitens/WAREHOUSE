@@ -24,10 +24,12 @@ class Warehouse
         return $this->products[$productId] ?? null;
     }
 
-    public function updateProductQuantity(string $productId, int $quantity): void
+    public function updateProductInfo(string $productId, string $name, int $quantity, float $price): void
     {
         if (isset($this->products[$productId])) {
+            $this->products[$productId]->setName($name);
             $this->products[$productId]->setQuantity($quantity);
+            $this->products[$productId]->setPrice($price);
         }
     }
 
@@ -64,14 +66,16 @@ class Warehouse
         $output = new ConsoleOutput();
 
         $table = new Table($output);
-        $table->setHeaders(['ID', 'Name', 'Quantity', 'CreatedAt', 'UpdatedAt']);
+        $table->setHeaders(['ID', 'Name', 'Quantity', 'Price', 'CreatedAt', 'Quality expiration date', 'UpdatedAt']);
 
         foreach ($this->products as $product) {
             $table->addRow([
                 $product->getId(),
                 $product->getName(),
                 $product->getQuantity(),
+                number_format($product->getPrice(), 2),
                 $product->getCreatedAt()->toDateTimeString(),
+                $product->getQualityDate() ? $product->getQualityDate()->format('Y-m-d'): null,
                 $product->getUpdatedAt() ? $product->getUpdatedAt()->toDateTimeString() : null,
             ]);
         }

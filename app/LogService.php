@@ -14,7 +14,7 @@ class LogService
         $formatter = new LineFormatter("%message%\n");
         $this->logger = new Logger('warehouse_app');
         $this->logger->pushHandler(new StreamHandler(__DIR__.'warehouse.log', Logger::INFO));
-        $handler = $this->logger->getHandlers()[0]; // Assuming there's only one handler
+        $handler = $this->logger->getHandlers()[0];
         $handler->setFormatter($formatter);
     }
 

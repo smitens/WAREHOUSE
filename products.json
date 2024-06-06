@@ -1,26 +1,92 @@
 {
     "0f19127c-fa5c-4523-ad80-f01f057b0ea2": {
         "id": "0f19127c-fa5c-4523-ad80-f01f057b0ea2",
-        "name": "Soap",
+        "name": "Soap \"Strawberry\"",
         "quantity": 20,
+        "price": 3,
         "createdAt": "2024-06-03 17:58:56",
-        "updatedAt": "2024-06-04 14:40:39",
+        "qualityDate": null,
+        "updatedAt": "2024-06-06 09:57:31",
         "deletedAt": null
     },
     "5cee37ef-b726-4efc-b051-764f615bcb84": {
         "id": "5cee37ef-b726-4efc-b051-764f615bcb84",
-        "name": "Shampoo",
+        "name": "Shampoo \"Best\"",
         "quantity": 20,
+        "price": 4,
         "createdAt": "2024-06-03 20:19:20",
-        "updatedAt": "2024-06-03 20:47:09",
+        "qualityDate": null,
+        "updatedAt": "2024-06-06 09:58:10",
         "deletedAt": null
     },
     "6f2a3cdb-0a99-43f1-a7ba-7515c0f1468f": {
         "id": "6f2a3cdb-0a99-43f1-a7ba-7515c0f1468f",
-        "name": "Parfume",
-        "quantity": 40,
+        "name": "Parfume \"She\"",
+        "quantity": 25,
+        "price": 7,
         "createdAt": "2024-06-04 06:23:21",
+        "qualityDate": null,
+        "updatedAt": "2024-06-06 09:59:05",
+        "deletedAt": null
+    },
+    "77c3127f-0085-4671-bac4-82490857bd94": {
+        "id": "77c3127f-0085-4671-bac4-82490857bd94",
+        "name": "Bread",
+        "quantity": 20,
+        "price": 2,
+        "createdAt": "2024-06-05 17:40:37",
+        "qualityDate": "2024-07-22",
         "updatedAt": null,
+        "deletedAt": null
+    },
+    "8a4bef4c-a77a-4316-9509-98cfe2e57834": {
+        "id": "8a4bef4c-a77a-4316-9509-98cfe2e57834",
+        "name": "Cup",
+        "quantity": 10,
+        "price": 1.5,
+        "createdAt": "2024-06-06 10:40:00",
+        "qualityDate": null,
+        "updatedAt": null,
+        "deletedAt": null
+    },
+    "9c343e10-6276-4f3e-ace5-d01bea9503d0": {
+        "id": "9c343e10-6276-4f3e-ace5-d01bea9503d0",
+        "name": "Dishwasher",
+        "quantity": 15,
+        "price": 2.65,
+        "createdAt": "2024-06-06 10:40:51",
+        "qualityDate": null,
+        "updatedAt": null,
+        "deletedAt": null
+    },
+    "586ba148-635e-44cf-96bf-948ea1250e95": {
+        "id": "586ba148-635e-44cf-96bf-948ea1250e95",
+        "name": "Vase",
+        "quantity": 3,
+        "price": 4,
+        "createdAt": "2024-06-06 11:34:13",
+        "qualityDate": null,
+        "updatedAt": "2024-06-06 12:06:56",
+        "deletedAt": null
+    },
+    "f39a8a3d-3be9-41d8-abbe-47f246802f4a": {
+        "id": "f39a8a3d-3be9-41d8-abbe-47f246802f4a",
+        "name": "Jogurt",
+        "quantity": 5,
+        "price": 1.3,
+        "createdAt": "2024-06-06 11:39:06",
+        "qualityDate": "2024-06-08",
+        "updatedAt": "2024-06-06 12:08:01",
+        "deletedAt": null
+    },
+    "39b35c4d-a54a-40b0-acd8-eb584c3a5926": {
+        "id": "39b35c4d-a54a-40b0-acd8-eb584c3a5926",
+        "name": "Dress ZARA",
+        "quantity": 10,
+        "price": 38.99,
+        "createdAt": "2024-06-06 11:39:33",
+        "qualityDate": null,
+        "updatedAt": "2024-06-06 12:08:55",
         "deletedAt": null
     }
 }

@@ -11,17 +11,22 @@ class Product implements JsonSerializable
     private string $id;
     private string $name;
     private int $quantity;
+    private float $price;
     private Carbon $createdAt;
     private ?Carbon $updatedAt;
     private ?Carbon $deletedAt;
+    private ?Carbon $qualityDate;
 
     public function __construct(
         string $name,
         int $quantity,
+        float $price,
         Carbon $createdAt,
+        ?Carbon $qualityDate = null,
         ?Carbon $updatedAt = null,
         ?Carbon $deletedAt = null,
-        ?string $id = null)
+        ?string $id = null
+        )
     {
         $this->id = $id ?? Uuid::uuid4()->toString();
         $this->name = $name;
@@ -29,6 +34,8 @@ class Product implements JsonSerializable
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->deletedAt = $deletedAt;
+        $this->price = $price;
+        $this->qualityDate = $qualityDate;
     }
 
     public function getId(): string
@@ -39,6 +46,21 @@ class Product implements JsonSerializable
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): void
+    {
+        $this->price = $price;
     }
 
     public function getQuantity(): int
@@ -94,13 +116,25 @@ class Product implements JsonSerializable
         $this->deletedAt = $deletedAt;
     }
 
+    public function getQualityDate(): ?Carbon
+    {
+        return $this->qualityDate;
+    }
+
+    public function setQualityDate(?Carbon $qualityDate): void
+    {
+        $this->qualityDate = $qualityDate;
+    }
+
     public function jsonSerialize(): array
     {
         return [
             "id" => $this->id,
             "name" => $this->name,
             "quantity" => $this->quantity,
+            "price" => $this->price,
             "createdAt" => $this->getCreatedAt()->toDateTimeString(),
+            "qualityDate" => $this->getQualityDate() ? $this->getQualityDate()->format('Y-m-d') : null,
             "updatedAt" => $this->getUpdatedAt() ? $this->getUpdatedAt()->toDateTimeString(): null,
             "deletedAt" => $this->getDeletedAt() ? $this->getDeletedAt()->toDateTimeString(): null,
         ];
@@ -111,7 +145,9 @@ class Product implements JsonSerializable
         return new Product(
             $data['name'],
             (int) $data['quantity'],
+            (float) $data['price'],
             Carbon::parse($data['createdAt']),
+            isset ($data['qualityDate']) ? Carbon::parse($data['qualityDate']): null,
             isset($data['updatedAt']) ? Carbon::parse($data['updatedAt']) : null,
             isset($data['deletedAt']) ? Carbon::parse($data['deletedAt']) : null,
             $data['id'] ?? null

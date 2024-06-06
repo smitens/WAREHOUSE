@@ -21,8 +21,8 @@ $username = trim(strtolower(readline("Username: ")));
 echo "Password: ";
 system('stty -echo');
 $password = trim(fgets(STDIN, 1024));
-system('stty echo'); // Show password input
-echo PHP_EOL; // Newline after password input
+system('stty echo');
+echo "\n";
 
 try {
     $message = $authService->login($username, $password);
@@ -45,7 +45,7 @@ while (true) {
             createProduct();
             break;
         case '2':
-            editProductQuantity();
+            editProductInfo();
             break;
         case '3':
             addProductQuantity();
@@ -60,6 +60,9 @@ while (true) {
             displayProducts();
             break;
         case '7':
+            generateReport();
+            break;
+        case '8':
             exit("Exiting Warehouse Management System. Goodbye!\n");
         default:
             echo "\033[31mInvalid choice. Please try again.\033[0m\n";
@@ -69,12 +72,13 @@ while (true) {
 function displayMenu(): void
 {
     echo "1. Create Product\n";
-    echo "2. Edit Product Quantity\n";
+    echo "2. Edit Product Information\n";
     echo "3. Add to Product Quantity\n";
     echo "4. Reduce Product Quantity\n";
     echo "5. Remove Product\n";
     echo "6. Display Products\n";
-    echo "7. Exit\n";
+    echo "7. Generate Product Report\n";
+    echo "8. Exit\n";
 }
 
 function createProduct(): void
@@ -83,20 +87,44 @@ function createProduct(): void
 
     $name = readline("Enter product name: ");
     $quantity = (int) readline("Enter product quantity: ");
-
+    $price = (float) readline("Enter product price in Euro: ");
+    $qualityDate = null;
+    while (true) {
+    $qualityDateInput = readline("Enter product quality expiration date (YYYY-MM-DD, if none, leave empty): ");
+    if (empty($qualityDateInput)) {
+    break;
+    }
+        $qualityDate = Carbon::parse($qualityDateInput);
+        if ($qualityDate->isPast()) {
+            echo "Error: The date must be in the future.\n";
+            continue;
+        }
+        break;
+    }
     $createdAt = Carbon::now();
-    $product = new Product($name, $quantity, $createdAt);
+    $product = new Product($name, $quantity, $price, $createdAt, $qualityDate);
     $productService->createProduct($product);
 }
 
-function editProductQuantity(): void
+function editProductInfo(): void
 {
     global $productService;
+    global $warehouse;
 
     $productId = readline("Enter product ID: ");
-    $quantity = (int) readline("Enter new quantity: ");
+    $product = $warehouse->getProduct($productId);
+    if (!$product) {
+        echo "Product not found!\n";
+        return;
+    }
+    $name = readline("Enter product name: ");
+    $quantity = (int) (trim(readline("Enter new quantity: ")));
+    $price = (float) (trim(readline("Enter product price: ")));
+    $name = $name ?: $product->getName();
+    $quantity = $quantity ?: $product->getQuantity();
+    $price = $price ?: $product->getPrice();
 
-    $productService->editProductQuantity($productId, $quantity);
+    $productService->editProductInfo($productId, $name, $quantity, $price);
 }
 
 function addProductQuantity(): void
@@ -133,4 +161,11 @@ function displayProducts(): void
 
     echo "Products in Warehouse:\n";
     $warehouse->displayProducts();
+}
+
+function generateReport(): void
+{
+    global $productService;
+    echo "Product Report:\n";
+    $productService->generateReport();
 }
