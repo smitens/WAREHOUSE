@@ -7,6 +7,7 @@ A command-line application called Warehouse Management System built in PHP. It a
 - **User Authentication**: Users are required to log in with a username and password (test pw available in json file).
 - **Product Management**: Users can create, edit, add to, reduce, and remove products from the warehouse inventory.
 - **Display Products**: Users can view all products currently stored in the warehouse.
+- **Create Report**: Users can generate report to view amount and total value of all products currently stored in the warehouse.
 
 ## Installation
 
@@ -42,4 +43,5 @@ Choose from the available menu options to manage products in the warehouse.
 4. **Reduce Product Quantity**: Decrease the quantity of an existing product.
 5. **Remove Product**: Delete a product from the warehouse inventory.
 6. **Display Products**: View all products currently stored in the warehouse.
-7. **Exit**: Quit the application.
+7. **Generate Product Report**: Generate report to view amount and total value of all products currently stored in the warehouse.
+8. **Exit**: Quit the application.
