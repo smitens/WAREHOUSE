@@ -96,7 +96,7 @@ function createProduct(): void
     }
         $qualityDate = Carbon::parse($qualityDateInput);
         if ($qualityDate->isPast()) {
-            echo "Error: The date must be in the future.\n";
+            echo "\033[31mError: The date must be in the future.\033[0m\n";
             continue;
         }
         break;
@@ -114,7 +114,7 @@ function editProductInfo(): void
     $productId = readline("Enter product ID: ");
     $product = $warehouse->getProduct($productId);
     if (!$product) {
-        echo "Product not found!\n";
+        echo "\033[31mProduct not found!\033[0m\n";
         return;
     }
     $name = readline("Enter product name: ");
