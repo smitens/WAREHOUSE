@@ -133,10 +133,10 @@ class Product implements JsonSerializable
             "name" => $this->name,
             "quantity" => $this->quantity,
             "price" => $this->price,
-            "createdAt" => $this->getCreatedAt()->toDateTimeString(),
+            "createdAt" => $this->getCreatedAt()->format('Y-m-d H:i:s'),
             "qualityDate" => $this->getQualityDate() ? $this->getQualityDate()->format('Y-m-d') : null,
-            "updatedAt" => $this->getUpdatedAt() ? $this->getUpdatedAt()->toDateTimeString(): null,
-            "deletedAt" => $this->getDeletedAt() ? $this->getDeletedAt()->toDateTimeString(): null,
+            "updatedAt" => $this->getUpdatedAt() ? $this->getUpdatedAt()->format('Y-m-d H:i:s'): null,
+            "deletedAt" => $this->getDeletedAt() ? $this->getDeletedAt()->format('Y-m-d H:i:s'): null,
         ];
     }
 

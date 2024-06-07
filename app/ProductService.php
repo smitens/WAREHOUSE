@@ -39,7 +39,7 @@ class ProductService
         $this->saveProducts();
         $this->logService->log(
             "User {$this->username} created product {$product->getName()} (ID: {$product->getId()}) at "
-            . Carbon::now()->toDateTimeString());
+            . Carbon::now()->format('Y-m-d H:i:s'));
     }
 
     public function editProductInfo(string $productId, string $name, int $quantity, float $price): void
@@ -52,12 +52,12 @@ class ProductService
             $this->saveProducts();
             $this->logService->log(
                 "User {$this->username} updated information for product {$product->getName()} (ID: {$productId})" .
-                "to {$quantity} at " . Carbon::now()->toDateTimeString());
+                "to {$quantity} at " . Carbon::now()->format('Y-m-d H:i:s'));
         } else {
             echo "\033[31mYou failed to update information!\033[0m\n";
             $this->logService->log(
                 "User {$this->username} failed to update information for product with ID: {$productId} at "
-                . Carbon::now()->toDateTimeString());
+                . Carbon::now()->format('Y-m-d H:i:s'));
         }
     }
 
@@ -69,12 +69,12 @@ class ProductService
             $this->saveProducts();
             $this->logService->log(
                 "User {$this->username} added quantity of {$quantity} to product {$product->getName()} (ID: {$productId}) at "
-                . Carbon::now()->toDateTimeString());
+                . Carbon::now()->format('Y-m-d H:i:s'));
         } else {
             echo "\033[31mYou failed to add quantity!\033[0m\n";
             $this->logService->log(
                 "User {$this->username} failed to add quantity for product with ID: {$productId} at "
-                . Carbon::now()->toDateTimeString());
+                . Carbon::now()->format('Y-m-d H:i:s'));
         }
     }
 
@@ -86,12 +86,12 @@ class ProductService
             $this->saveProducts();
             $this->logService->log(
                 "User {$this->username} reduced quantity of {$quantity} from product {$product->getName()} (ID: {$productId}) at "
-                . Carbon::now()->toDateTimeString());
+                . Carbon::now()->format('Y-m-d H:i:s'));
         } else {
             echo "\033[31mYou failed to reduce quantity!\033[0m\n";
             $this->logService->log(
                 "User {$this->username} failed to reduce quantity for product with ID: {$productId} at "
-                . Carbon::now()->toDateTimeString());
+                . Carbon::now()->format('Y-m-d H:i:s'));
         }
     }
 
@@ -102,12 +102,12 @@ class ProductService
             $this->saveProducts();
             $this->logService->log(
                 "User {$this->username} removed product {$product->getName()} (ID: {$productId}) at "
-                . Carbon::now()->toDateTimeString());
+                . Carbon::now()->format('Y-m-d H:i:s'));
         } else {
             echo "\033[31mYou failed to remove product!\033[0m\n";
             $this->logService->log(
                 "User {$this->username} failed to remove product with ID: {$productId} at " .
-                Carbon::now()->toDateTimeString());
+                Carbon::now()->format('Y-m-d H:i:s'));
         }
     }
 
@@ -115,7 +115,7 @@ class ProductService
     {
         $this->dataManagement->saveProducts($this->warehouse->listProducts());
         $this->logService->log(
-            "User {$this->username} saved products to file at " . Carbon::now()->toDateTimeString());
+            "User {$this->username} saved products to file at " . Carbon::now()->format('Y-m-d H:i:s'));
     }
 
     public function generateReport(): void
@@ -134,6 +134,6 @@ class ProductService
         ]);
         $table->render();
         $this->logService->log(
-            "User {$this->username} generated product report at " . Carbon::now()->toDateTimeString());
+            "User {$this->username} generated product report at " . Carbon::now()->format('Y-m-d H:i:s'));
     }
 }

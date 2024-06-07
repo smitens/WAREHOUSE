@@ -74,9 +74,9 @@ class Warehouse
                 $product->getName(),
                 $product->getQuantity(),
                 number_format($product->getPrice(), 2),
-                $product->getCreatedAt()->toDateTimeString(),
+                $product->getCreatedAt()->format('Y-m-d H:i:s'),
                 $product->getQualityDate() ? $product->getQualityDate()->format('Y-m-d'): null,
-                $product->getUpdatedAt() ? $product->getUpdatedAt()->toDateTimeString() : null,
+                $product->getUpdatedAt() ? $product->getUpdatedAt()->format('Y-m-d H:i:s') : null,
             ]);
         }
         $table->render();
